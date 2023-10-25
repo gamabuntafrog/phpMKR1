@@ -1,0 +1,38 @@
+<?php
+
+/** @var array $products */
+$products;
+/** @var array $filteredProducts */
+$filteredProducts;
+
+$productsCountries = [];
+foreach ($products as $object) {
+    $productsCountries[] = $object['country'];
+}
+
+$countries = array_unique($productsCountries);
+?>
+
+<form method="GET">
+    <label for="country">Країна виробник:</label>
+    <select id="country" name="country">
+        <option value="all">Будь яка</option>
+        <?php
+        foreach ($countries as $country) {
+            echo "<option value='" . $country . "'>" . $country . "</option>";
+        }
+        ?>
+    </select>
+    <button type="submit" >Знайти</button>
+</form>
+
+<ul>
+    <?php foreach ($filteredProducts as $product) : ?>
+        <li>
+            <h3>Товар <?= $product['id']; ?></h3>
+        </li>
+        <li><?= $product['title']; ?></li>
+        <li><?= $product['country']; ?></li>
+        <li><?= $product['price']; ?></li>
+    <?php endforeach; ?>
+</ul>
